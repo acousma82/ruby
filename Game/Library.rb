@@ -14,7 +14,13 @@ class Library
 
   def add_game(game)
     games << game
+    log("Added the game #{game}")
   end
-
-  def
+  
+  private
+  
+  def log(message)
+    puts message
+  end
+  
 end

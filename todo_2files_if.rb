@@ -1,4 +1,4 @@
-#module
+#modules
 
 module Menu
     def menu
@@ -45,7 +45,7 @@ attr_reader :all_tasks
     end
     
     def show
-        @all_tasks.map.with_index { |task, i| "#{i.next})#{task}" }.join("\n")           # all_tasks.map.with_index { |l, i| "(#{i.next}): #{l}"}
+        @all_tasks.map.with_index { |task, i| "#{i.next})#{task}" }.join("\n")          
     end
 
     def delete(task_number)
@@ -53,25 +53,18 @@ attr_reader :all_tasks
     end
 
     def write_to_file(filename)
-        machinified = @all_tasks.map(&:to_machine).join("\n")       #@all_tasks.map(&:to_machine).join("\n")
+        machinified = @all_tasks.map(&:to_machine).join("\n")       
         IO.write(filename, machinified)
     end
 
     def read_from_file(filename)
-       @lines = IO.readlines(filename).to_s
-       
-       
-        if @lines.include?(":") 
-          
-          IO.readlines(filename).each do |line|                    #.split Divides str into substrings based on a delimiter, returning an array of these substrings.
-          c_status, *description = line.split(':')                  # here the (":") splits the string intop an array like [[], thing, to, do]. status, *description = usw assigns [] to status and "task" to an                                                                    array of strings called description
-          c_status = c_status.downcase.include?('x')                  # wenn  string include? x dann setze den status auf true andernfalls ist er false
+
+                IO.readlines(filename).each do |line|                    #.split Divides str into substrings based on a delimiter, returning an array of these substrings.
+                c_status, *description = line.split(':') # here the (":") splits the string intop an array like [[], thing, to, do]. status, *description = usw assigns [] to status and "task" to an array of strings 
+                c_status = c_status.downcase.include?('x')                  # wenn  string include? x dann setze den status auf true andernfalls ist er false
                 add(Task.new(description.join.strip, c_status))    #alte .read methode:  IO.readlines(filename).each do |line| add(Task.new(line.chomp))
-                 end
-        else 
+                end
         
-        IO.readlines(filename).each do |line| add(Task.new(line.chomp)) end
-        end
      end
 
     def update (task_number, task)
