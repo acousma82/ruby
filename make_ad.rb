@@ -1,5 +1,5 @@
 lines = []
-File.open("reviews.txt") do |review_file|
+File.open("reviews.txt") do |review_file| # innerhalb eines blocks wird die Datei automatisch wieder geschlossen
     lines = review_File.readlines
 end
 
